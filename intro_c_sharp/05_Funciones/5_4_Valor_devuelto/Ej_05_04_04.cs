@@ -4,7 +4,7 @@
  */
  using System;
  
- public class Ejercicio_5_5_4
+ public class Ejercicio_5_4_4
  {
 	//función que calcula la leta inicial de una palabra
 	public static char Inicial(string palabra)

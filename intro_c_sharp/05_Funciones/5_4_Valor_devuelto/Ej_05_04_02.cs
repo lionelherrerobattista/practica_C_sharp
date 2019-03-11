@@ -4,7 +4,7 @@
  */
  using System;
  
- public class Ejercicio_5_5_2
+ public class Ejercicio_5_4_2
  {
 	 //Función que calcular el menor de dos números enteros
 	 public static int Menor(int numeroUno, int numeroDos)
