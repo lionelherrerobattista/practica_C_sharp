@@ -1,38 +1,37 @@
-/*(4.4.9.3) Crea un juego del ahorcado, en el que un primer usuario
- * introduzca la palabra a adivinar, se muestre ésta oculta con guiones
- * (-----) y el programa acepte las letras que introduzca el segundo
- * usuario, cambiando los guiones por letras correctas cada vez que
- * acierte (por ejemplo, a---a-t-). La partida terminará
- * cuando se acierte la palabra por completo
- * o el usuario agote sus 8 intentos.
+/* (5.9.1.3) Mejora el programa del ahorcado (4.4.9.3),
+ * para que la palabra a adivinar no sea tecleada
+ * por un segundo usuario, sino que se escoja al azar de un "array"
+ * de palabras prefijadas (por ejemplo, nombres de ciudades).
  */
  using System;
  using System.Text;
  
- public class Ejercicio_4_4_9_3
+ public class Ejercicio_5_9_1_3
  {
 	 public static void Main()
 	 {
 		 StringBuilder cadenaModificable;
+		 Random indice = new Random();
+		 
 		 string palabra; //la palabra a adivinar
+		 string[] ciudades = {"Roma", "Paris", "Londres", "Montevideo",
+			 "Berlin", "Moscu", "Madrid", "Tokio", "Helsinki", "Oslo"};//guardo 10 ciudades
 		 char caracter; //el carácter que ingresa el usuario
 		 string cadenaFinal;
+		 int indiceAleatorio;
 		 int i;
 		 int intentos = 8;
 		 bool error = true;
 		 
-		 //Pido al usuario la palabra a adivinar
-		 Console.Write("Escribí la palabra a adivinar: ");
-		 //Cambio el color de la fuente para ocultar el texto
-		 Console.ForegroundColor = ConsoleColor.Black;
-		 palabra = Console.ReadLine();
-		 //Vuelvo a cambiar el color de la fuente
-		 Console.ForegroundColor = ConsoleColor.White;
+		 //Creo un numero de indice aleatorio
+		 indiceAleatorio = indice.Next(0, 11);
+		 
+		 palabra = ciudades[indiceAleatorio];
 		 
 		 //Asigno espacio en memoria para la cadena modificable
 		 cadenaModificable = new StringBuilder(palabra);
 		 
-		 //Oculto lo que ingresó el primer usuario
+		 //Oculto la palabra
 		 for(i = 0; i < cadenaModificable.Length; i++)
 		 {
 			 cadenaModificable[i] = '-';
@@ -54,7 +53,7 @@
 			 //Compruebo si está la misma letra
 			 for(i = 0; i < cadenaModificable.Length; i++)
 			 {
-				 if(palabra[i] == caracter)
+				 if(Char.ToLower(palabra[i]) == Char.ToLower(caracter))
 				 {
 					 cadenaModificable[i] = palabra[i];
 					 error = false;
@@ -67,7 +66,7 @@
 			 if(String.Compare(cadenaFinal, palabra) == 0)
 			 {
 				 Console.WriteLine();
-				 Console.WriteLine("¡¡Ganaste!! =)");
+				 Console.WriteLine("¡¡Ganaste!! =) Palabra: {0}", cadenaFinal);
 				 break;
 			 }
 			 
@@ -87,6 +86,7 @@
 		 {
 			 Console.WriteLine();
 			 Console.WriteLine("Perdiste :(");
+			 Console.WriteLine("La palabra era {0}", palabra);
 		 }
 		 
 		 
